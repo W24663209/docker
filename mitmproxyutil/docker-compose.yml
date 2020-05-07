@@ -1,0 +1,11 @@
+version: '3'
+services:
+  mitmproxyutil:
+    #    build: .
+    image: "mitmproxyutil_mitmproxyutil:latest"
+    container_name: mitmproxyutil
+    ports:
+      - 8888:8080
+    restart: always
+    volumes:
+      - /Users/weizongtang/logs/mitmproxyutil/mitmproxyutil.log:/mitmproxyutil/mitmproxyutil.log

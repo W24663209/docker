@@ -1,0 +1,1 @@
+mongoimport --db TABLE_SCHEMA --collection TABLE_NAME --type csv --headerline --file CSV_PATH

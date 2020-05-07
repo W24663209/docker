@@ -1,0 +1,17 @@
+version: '3'
+services:
+  mysql:
+    build: .
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: "666666WW"
+      MYSQL_USER: 'test'
+      MYSQL_PASS: '666666WW'
+    restart: always
+    ports:
+      - 3306:3306
+    volumes:
+      - ./conf:/etc/mysql/mysql.conf.d
+      - ./db:/db
+      - ./binlog:/data/binlog
+      - ./log/mysql.log:/data/log/mysql.log

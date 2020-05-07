@@ -1,0 +1,15 @@
+INFO:root:删除:test/requirements.txt
+INFO:oss2.api:Start to delete object, bucket: weizongtang-mac-backup, key: test/requirements.txt
+INFO:root:上传:/syn/test/upload2file.log
+INFO:root:上传:/syn/test/upload2file.log
+INFO:root:上传:/syn/test/结清后账单.xlsx
+INFO:root:上传:/syn/test/结清后账单.xlsx
+INFO:root:上传:/syn/test/mac解除硬盘读写速度限制.md
+INFO:root:删除:test/mac解除硬盘读写速度限制.md
+INFO:oss2.api:Start to delete object, bucket: weizongtang-mac-backup, key: test/mac解除硬盘读写速度限制.md
+INFO:root:上传:/syn/test/结清后账单.xlsx
+INFO:root:上传:/syn/test/结清后账单.xlsx
+INFO:root:删除:test/结清后账单.xlsx
+INFO:oss2.api:Start to delete object, bucket: weizongtang-mac-backup, key: test/结清后账单.xlsx
+INFO:root:上传:/syn/test/upload2file.log
+INFO:root:上传:/syn/test/upload2file.log
