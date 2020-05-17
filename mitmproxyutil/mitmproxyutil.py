@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-import json
 
 from mitmproxy.options import Options
 from mitmproxy.proxy.config import ProxyConfig
 from mitmproxy.proxy.server import ProxyServer
 from mitmproxy.tools.dump import DumpMaster
 import logging
+import lxml
 
 logging.basicConfig(level=logging.INFO,  # 控制台打印的日志级别
                     filename='mitmproxyutil.log',
@@ -27,15 +27,19 @@ class Addon(object):
         pass
 
     def response(self, flow):
+        if flow.request.url.__contains__('webchat.7moor.com'):
+            print(flow.request.url)
+            # with open('1.html','r') as f:
+            # flow.response.text=f.read()
+            # with open('1.json','r') as f:
+            flow.response.text = ''
         allow_headers = flow.response.headers.get('Access-Control-Allow-Headers')  # type: str
         accept = flow.request.headers.get('Accept')  # type: str
-        if not flow.request.url.__contains__('192.168.1.131'):
-            return
+        # if not flow.request.url.__contains__('192.168.1.131'):
+        #     return
         if not ((allow_headers and allow_headers.__contains__('X-Requested-With')) or (
                 accept and accept.__contains__('application/json'))):
             return
-
-
         if flow.response.text:
             query = {}
             url = flow.request.url
@@ -50,7 +54,7 @@ class Addon(object):
             logging.info('请求地址:%s\n请求方式:%s\n请求信息:%s\n返回信息:%s' % (url, method, query, text))
             print('请求地址:%s\n请求方式:%s\n请求信息:%s\n返回信息:%s' % (url, method, query, text))
             print('\n')
-        # do something in response
+    # do something in response
 
 
 class ProxyMaster(DumpMaster):
@@ -65,7 +69,7 @@ class ProxyMaster(DumpMaster):
 
 
 if __name__ == "__main__":
-    options = Options(listen_host='0.0.0.0', listen_port=8888, mode="socks5", http2=True)
+    options = Options(listen_host='0.0.0.0', listen_port=8080, http2=True)
     config = ProxyConfig(options)
     master = ProxyMaster(options, with_termlog=False, with_dumper=False)
     master.server = ProxyServer(config)
