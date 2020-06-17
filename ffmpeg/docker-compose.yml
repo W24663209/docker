@@ -1,0 +1,11 @@
+version: '3'
+services:
+  ffmpeg:
+    image: jrottenberg/ffmpeg:latest
+    container_name: ffmpeg
+    restart: always
+    ports:
+      - 8099:8080
+    volumes:
+      - ./out:/out
+      - ./source:/source
