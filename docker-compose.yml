@@ -1,32 +1,50 @@
+# version: '3'
+# services:
+#   mongo:
+#     image: mongo:latest
+#     container_name: mongo
+#     ports:
+#       - 27017:27017
+#   nginx:
+#     image: nginx:latest
+#     container_name: nginx
+#     ports:
+#       - 8888:80
+#     restart: always
+#   mitmproxyutil:
+#     build: ./mitmproxyutil
+#     container_name: mitmproxyutil
+#     ports:
+#       - 8088:8080
+#     restart: always
+#     volumes:
+#       - ./mitmproxyutil/mitmproxyutil.py:/mitmproxyutil.py
+#       - ./mitmproxyutil/mitmproxyutil.log:/mitmproxyutil.log
+#   hard-disk-monitoring:
+#     build: ./hard-disk-monitoring
+#     container_name: hard-disk-monitoring
+#     restart: always
+#     volumes:
+#       - /Users/weizongtang/server/docker/hard-disk-monitoring:/hard-disk-monitoring
+#       - /Users/weizongtang/Public/test:/syn/test
+#       - /Users/weizongtang/Public/server:/syn/server
+#       - /Users/weizongtang/Documents/笔记:/syn/笔记
+#       - /Users/weizongtang/logs/hard-disk-monitoring:/logs
+
 version: '3'
 services:
-  mongo:
-    image: mongo:latest
-    container_name: mongo
-    ports:
-      - 27017:27017
-  nginx:
-    image: nginx:latest
-    container_name: nginx
-    ports:
-      - 8888:80
+  mysql:
+    build: .
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: "666666WW"
+      MYSQL_USER: 'test'
+      MYSQL_PASS: '666666WW'
     restart: always
-  mitmproxyutil:
-    build: ./mitmproxyutil
-    container_name: mitmproxyutil
     ports:
-      - 8088:8080
-    restart: always
+      - 3306:3306
     volumes:
-      - ./mitmproxyutil/mitmproxyutil.py:/mitmproxyutil.py
-      - ./mitmproxyutil/mitmproxyutil.log:/mitmproxyutil.log
-  hard-disk-monitoring:
-    build: ./hard-disk-monitoring
-    container_name: hard-disk-monitoring
-    restart: always
-    volumes:
-      - /Users/weizongtang/server/docker/hard-disk-monitoring:/hard-disk-monitoring
-      - /Users/weizongtang/Public/test:/syn/test
-      - /Users/weizongtang/Public/server:/syn/server
-      - /Users/weizongtang/Documents/笔记:/syn/笔记
-      - /Users/weizongtang/logs/hard-disk-monitoring:/logs
+      - mysql/conf:/etc/mysql/mysql.conf.d
+      - mysql/db:/db
+      - mysql/binlog:/data/binlog
+      - mysql/log/mysql.log:/data/log/mysql.log
