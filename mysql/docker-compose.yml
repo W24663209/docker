@@ -1,7 +1,7 @@
 version: '3'
 services:
   mysql:
-    build: .
+    image: mysql:8.0.23
     container_name: mysql
     environment:
       MYSQL_ROOT_PASSWORD: "666666WW"
@@ -11,7 +11,7 @@ services:
     ports:
       - 3306:3306
     volumes:
-      - ./conf:/etc/mysql/mysql.conf.d
+      - ./config:/etc/mysql
       - ./db:/db
       - ./binlog:/data/binlog
       - ./log/mysql.log:/data/log/mysql.log
