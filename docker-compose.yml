@@ -34,7 +34,7 @@
 version: '3'
 services:
   mysql:
-    build: .
+    image: mysql:8.0.23
     container_name: mysql
     environment:
       MYSQL_ROOT_PASSWORD: "666666WW"
@@ -44,7 +44,27 @@ services:
     ports:
       - 3306:3306
     volumes:
-      - mysql/conf:/etc/mysql/mysql.conf.d
-      - mysql/db:/db
-      - mysql/binlog:/data/binlog
-      - mysql/log/mysql.log:/data/log/mysql.log
+      - ./mysql/conf:/etc/mysql/mysql.conf.d
+      - ./mysql/db:/db
+      - ./mysql/binlog:/data/binlog
+      - ./mysql/log/mysql.log:/data/log/mysql.log
+  redis:
+    image: redis:latest
+    container_name: redis
+    ports:
+      - 6379:6379
+    command: redis-server --port 6379 --requirepass 123456  --appendonly yes
+    restart: always
+  rocketmq:
+    image: java:8
+    container_name: rocketmq
+    ports:
+      - 9876:9876
+    restart: always
+    tty: true
+    volumes:
+      - ./rocketmq:/rocketmq
+    working_dir: /rocketmq
+    entrypoint:
+      - /rocketmq/start.sh
+
